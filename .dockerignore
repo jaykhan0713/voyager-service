@@ -1,0 +1,7 @@
+.git
+.gradle
+build
+out
+**/*.iml
+**/.DS_Store
+**/Thumbs.db

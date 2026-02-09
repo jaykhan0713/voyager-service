@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false">
+
+    <!-- MDC key Spring properties -->
+    <springProperty name="MDC_USER_ID" source="platform.observability.mdc.user-id"/>
+    <springProperty name="MDC_REQUEST_ID" source="platform.observability.mdc.request-id"/>
+    <springProperty name="MDC_KIND" source="platform.observability.mdc.kindValues.http"/>
+    <springProperty name="MDC_NAME" source="platform.observability.mdc.name"/>
+    <springProperty name="MDC_METHOD" source="platform.observability.mdc.method"/>
+    <springProperty name="MDC_STATUS" source="platform.observability.mdc.status"/>
+    <springProperty name="MDC_DURATION_MS" source="platform.observability.mdc.duration-ms"/>
+
+    <!-- index friendly pattern for lookups -->
+    <property name="SIMPLE_PATTERN"
+              value='[%thread] logger="%logger{36}" level="%-5level" date="%d{yyyy-MM-dd HH:mm:ss.SSS}" msg="%msg"%n'/>
+
+    <property name="BOOTSTRAP_PATTERN"
+              value='[%thread] logger="%logger{36}" level="%level" date="%d{yyyy-MM-dd HH:mm:ss.SSS}" msg="%msg"%n'/>
+
+    <property name="APP_PATTERN"
+              value='[%thread] logger="%logger{36}" level="%level" date="%d{yyyy-MM-dd HH:mm:ss.SSS}" traceId="%X{traceId:--}" spanId="%X{spanId:--}" %msg%n'/>
+
+    <property name="MDC_FILTER_PATTERN"
+              value='[%thread] logger="%logger{36}" level="%level" date="%d{yyyy-MM-dd HH:mm:ss.SSS}" traceId="%X{traceId}" spanId="%X{spanId}" userId="%X{${MDC_USER_ID}}" requestId="%X{${MDC_REQUEST_ID}}" kind="%X{kind}" name="%X{${MDC_NAME}}" method="%X{${MDC_METHOD}}" status="%X{${MDC_STATUS}}" durationMs="%X{${MDC_DURATION_MS}}"%n'/>
+
+    <!-- ================= DEV PROFILE ================= -->
+    <springProfile name="dev,smoke"> <!-- smoke for helping with seeing logs in functional tests -->
+
+        <!-- Library/Framework logs -->
+        <appender name="DEV_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${SIMPLE_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="DEV_BOOTSTRAP_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${BOOTSTRAP_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="DEV_APP_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${APP_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <!-- mdc filter logs (one per identity) -->
+        <appender name="DEV_MDC_FILTER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${MDC_FILTER_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="DEV_CONSOLE"/>
+        </root>
+
+        <!-- Classes in com.jay.template.* Non-identity-based logs -->
+        <logger name="com.jay.template.Starter" level="INFO" additivity="false">
+            <appender-ref ref="DEV_CONSOLE"/>
+        </logger>
+
+        <logger name="com.jay.template.bootstrap" level="DEBUG" additivity="false">
+            <appender-ref ref="DEV_BOOTSTRAP_CONSOLE"/>
+        </logger>
+
+        <!-- All classes under com.jay.template.* logs with MDC traceId and userId etc. -->
+        <logger name="com.jay.template" level="DEBUG" additivity="false">
+            <appender-ref ref="DEV_APP_CONSOLE"/>
+        </logger>
+
+        <!-- MDC filter logger with response info as well -->
+        <property name="MDC_FILTER_APPENDER" value="DEV_MDC_FILTER_CONSOLE" />
+
+    </springProfile>
+
+    <!-- ================= PROD PROFILE ================= -->
+    <springProfile name="prod">
+
+        <!-- JSON console appender for CloudWatch -->
+        <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <fieldNames>
+                    <timestamp>timestamp</timestamp>
+                    <logger>logger</logger>
+                    <thread>thread</thread>
+                    <level>level</level>
+                    <levelValue>[ignore]</levelValue>
+                    <version>[ignore]</version>
+                </fieldNames>
+                <timeZone>UTC</timeZone>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="JSON_CONSOLE"/>
+        </root>
+
+        <property name="MDC_FILTER_APPENDER" value="JSON_CONSOLE" />
+
+    </springProfile>
+
+    <!-- custom loggers -->
+    <logger name="com.jay.template.web.servlet.filter.MdcFilter" level="INFO" additivity="false">
+        <appender-ref ref="${MDC_FILTER_APPENDER}" />
+    </logger>
+
+</configuration>

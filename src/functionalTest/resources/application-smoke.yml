@@ -1,0 +1,13 @@
+#this settings file is loaded into the main spring container, NOT by the test framework.
+spring:
+  config:
+    activate:
+      on-profile: smoke
+
+platform:
+  outbound:
+    http:
+      clients:
+        ping:
+          base-url: "http://ping-service.internal"
+          read-timeout: 4s

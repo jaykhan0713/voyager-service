@@ -1,0 +1,64 @@
+services:
+  service-template:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: service-template:dev
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      OTLP_ENABLED: "true"
+      OTLP_ENDPOINT: "http://otel-collector:4318/v1/traces"
+      OTEL_SERVICE_NAME: "service-template"
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=service-template"
+    networks: [obs]
+    depends_on:
+      - otel-collector
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command: ["--config.file=/etc/prometheus/prometheus.yml"]
+    networks: [obs]
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning:ro
+    networks: [obs]
+    depends_on:
+      - prometheus
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "16686:16686" # Jaeger UI
+    networks: [obs]
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    volumes:
+      - ./docker/otel/otel-collector.yml:/etc/otelcol/config.yml:ro
+    command: ["--config=/etc/otelcol/config.yml"]
+    networks: [obs]
+    depends_on:
+      - jaeger
+
+networks:
+  obs:
+    driver: bridge #Containers on the same bridge can resolve each other by service name.
+
+volumes:
+  grafana-data:

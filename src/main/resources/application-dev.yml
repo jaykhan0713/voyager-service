@@ -1,0 +1,19 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+management:
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: ${OTLP_ENDPOINT:http://otel-collector:4318/v1/traces}
+  tracing:
+    export:
+      otlp:
+        enabled: ${OTLP_ENABLED:false} #enable exporting SPANS

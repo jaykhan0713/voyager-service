@@ -1,0 +1,34 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - "set -e"
+      - "echo Logging in to ECR..."
+      - "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
+      - "SHORT_SHA=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c1-7)"
+      - "IMAGE_TAG=git-${SHORT_SHA}-${CODEBUILD_BUILD_NUMBER}"
+      - "IMAGE_URI=${ECR_REPO_URI}:${IMAGE_TAG}"
+      - "BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk"
+      - "RUNTIME_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jre"
+      - "echo IMAGE_URI=${IMAGE_URI}"
+      - "echo BUILD_IMAGE=${BUILD_IMAGE}"
+      - "echo RUNTIME_IMAGE=${RUNTIME_IMAGE}"
+
+  build:
+    commands:
+      - "echo Building image..."
+      - "VERSION=${IMAGE_TAG}"
+      - "echo VERSION=${VERSION}"
+      - "docker build --build-arg VERSION=${VERSION} --build-arg BUILD_IMAGE=${BUILD_IMAGE} --build-arg RUNTIME_IMAGE=${RUNTIME_IMAGE} -t ${IMAGE_URI} ."
+
+  post_build:
+    commands:
+      - "echo Pushing image..."
+      - "docker push ${IMAGE_URI}"
+      - "echo ${IMAGE_TAG} > imagetag.txt"
+      - "echo Done."
+
+artifacts:
+  files:
+    - imagetag.txt

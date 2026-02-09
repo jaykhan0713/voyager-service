@@ -1,0 +1,152 @@
+server: # embedded servlet container configs
+  port: 8080
+
+  tomcat: # edge / connector-level (NIO) configs
+    # Slow client protection (time allowed to receive request line + headers + start of body)
+    connection-timeout: 5s
+
+    # Cap concurrent accepted TCP connections (Tomcat-owned sockets)
+    # Protects from file descriptor exhaustion + kernel/Tomcat memory pressure
+    max-connections: 2000
+
+    # Accept backlog size: how many completed TCP handshakes can wait
+    # before Tomcat calls accept() and the kernel hands off a new socket FD
+    accept-count: 200
+
+    # Don’t let idle keep-alive connections stay around forever
+    # Protects from clients that keep sockets open but don't send another request
+    keep-alive-timeout: 15s
+
+  # max-http-request-header-size: 16KB # optional
+
+spring:
+  application:
+    name: service-template
+
+  threads: # This app is built around project loom design, MUST enable virtual threads.
+    virtual:
+      enabled: true
+
+  mvc.problemdetails.enabled: true #return RFC7807 problem details in error responses
+
+  main:
+    # This application is a servlet-based web application.
+    # Auto configure embedded servlet container, Spring MVC, registers the DispatcherServlet
+    web-application-type: servlet
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #health,metrics,prometheus,env,loggers,beans
+
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+    env:
+      show-values: always
+    configprops:
+      show-values: always
+
+  tracing:
+    propagation:
+      type: w3c
+    sampling:
+      probability: 1.0
+    export:
+      otlp:
+        # NOTE: to enable AUTOCONFIGURATION, must be present (configures correct handler Propagators etc)
+        enabled: false # tracer still exists, but SPANS don't leave the process
+
+  otlp:
+    metrics:
+      export:
+        enabled: false # would try to export metrics to something like http://localhost:4318/v1/metrics
+
+resilience4j:
+  bulkhead:
+    instances: #inbound instances only as it's a framework level concern.
+      webBulkheadFilter:
+        max-concurrent-calls: 200 # max number of permits given at the inbound filter.
+        max-wait-duration: 0 # fail-fast when no permits available.
+
+platform: # namespace for Spring configuration keys
+  transport: # Inbound/Outbound can share attributes here
+    http:
+      headers:
+        user-id: "x-user-id"
+        request-id: "x-request-id"
+
+    #future protocol attributes we're concerned with can be added here.
+
+  observability:
+    mdc:
+      # transport protocol agnostic
+      user-id: "userId"
+      request-id: "requestId"
+      kind: "kind" # http, sqs etc
+      name: "name" # e.g. "/users/{id}", "queue:orders"
+      method: "method" #GET, POST, QUERY
+      status: "status"
+      duration-ms: "durationMs"
+
+      kind-values: # future protocol kindValues can be added here
+        http: "http"
+
+  outbound:
+    http:  # configuration for http clients, add protocols as needed
+      client-defaults:
+        connect-timeout: 2s # max time allowed for getting a usable network connection (DNS + TCP + TLS), end to end.
+        read-timeout: 5s # waiting on external I/O
+
+        resiliency:
+          bulkhead:
+            enabled: true #for downstream we ALWAYS want to enable for backpressure safety.
+            max-concurrent-calls: 50
+            max-wait-duration: 0
+
+          circuit-breaker:
+            enabled: true
+
+            # Percentage of recorded failures required to open the breaker
+            failure-rate-threshold: 50
+
+            # Any call taking longer than this is considered slow
+            # Note that connect and read timeouts are worst case scenario guardrails
+            # should be below the sum of those + give headroom for expected in-app processing
+            # to meet Service Level Objectives (SLOs)
+            slow-call-duration-threshold: 5s
+
+            # Percentage of slow calls required to open the breaker
+            # Note that you can have slow success and slow failure recorded in sliding window.
+            slow-call-rate-threshold: 50
+
+            # Sliding window counts a fixed number of calls (not time-based)
+            # Better for consistent traffic and predictable behavior
+            # TIME_BASED is better for unpredictable traffic patterns.
+            sliding-window-type: COUNT_BASED
+
+            # Number of calls kept in the sliding window for statistics
+            # Larger = smoother but slower reaction
+            sliding-window-size: 50
+
+            # Minimum number of calls needed before circuit breaker is allowed to open
+            # Prevents tripping on low traffic or cold start
+            minimum-number-of-calls: 20
+
+            # Number of test calls allowed in HALF_OPEN open state
+            # Used to check whether the dependency has recovered
+            permitted-number-of-calls-in-half-open-state: 10
+
+            # Time the breaker stays OPEN before transition to HALF_OPEN
+            wait-duration-in-open-state: 10s
+
+      # add configurable http clients here. Transport agnostic, doesn't need to be RestClient
+#      clients:
+#        payments: # example client for services in same VPC or organization, propagates identity
+#          base-url: "http://payments-service.internal" # Example endpoint
+#          read-timeout: 4s
+
+

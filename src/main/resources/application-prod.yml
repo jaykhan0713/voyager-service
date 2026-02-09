@@ -1,0 +1,41 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # expose all only for tuning initially, then keep only what is needed
+  # endpoint.health.show-details: never # uncomment when service is ready
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: http://127.0.0.1:4317
+          transport: grpc
+  tracing:
+    export:
+      otlp:
+        enabled: true #enable exporting SPANS through autoconfiguration
+    sampling:
+      probability: 1.0
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  metrics:
+    tags:
+      env: ${SPRING_PROFILES_ACTIVE:unknown}
+      version: ${VERSION:unknown}
+
+server:
+  shutdown: graceful
+  compression: #if client sends Accept-Encoding: gzip, automatically get this feature during response
+    enabled: true
+    min-response-size: 1024
+    mime-types:
+      - application/json
