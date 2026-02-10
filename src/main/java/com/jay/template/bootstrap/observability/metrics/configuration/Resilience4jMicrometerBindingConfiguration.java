@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.observability.metrics.configuration;
+package com.jay.voyager.bootstrap.observability.metrics.configuration;
 
 import io.github.resilience4j.bulkhead.BulkheadRegistry;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;

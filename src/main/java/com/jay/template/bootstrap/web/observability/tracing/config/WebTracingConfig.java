@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.web.observability.tracing.config;
+package com.jay.voyager.bootstrap.web.observability.tracing.config;
 
 import io.micrometer.observation.ObservationRegistry;
 import org.springframework.boot.micrometer.observation.autoconfigure.ObservationRegistryCustomizer;

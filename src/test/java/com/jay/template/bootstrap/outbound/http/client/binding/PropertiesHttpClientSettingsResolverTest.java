@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.outbound.http.client.binding;
+package com.jay.voyager.bootstrap.outbound.http.client.binding;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -8,10 +8,10 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import com.jay.template.bootstrap.outbound.http.properties.OutboundHttpProperties;
-import com.jay.template.bootstrap.outbound.resiliency.properties.ResiliencyProperties;
-import com.jay.template.core.outbound.http.client.settings.HttpClientSettings;
-import com.jay.template.core.outbound.resiliency.policy.ResiliencyPolicy;
+import com.jay.voyager.bootstrap.outbound.http.properties.OutboundHttpProperties;
+import com.jay.voyager.bootstrap.outbound.resiliency.properties.ResiliencyProperties;
+import com.jay.voyager.core.outbound.http.client.settings.HttpClientSettings;
+import com.jay.voyager.core.outbound.resiliency.policy.ResiliencyPolicy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

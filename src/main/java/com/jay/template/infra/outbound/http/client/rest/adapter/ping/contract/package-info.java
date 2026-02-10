@@ -12,4 +12,4 @@
  * generation into the template.
  * </p>
  */
-package com.jay.template.infra.outbound.http.client.rest.adapter.ping.contract;
+package com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.contract;

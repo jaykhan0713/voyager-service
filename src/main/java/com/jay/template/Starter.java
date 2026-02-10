@@ -1,4 +1,4 @@
-package com.jay.template;
+package com.jay.voyager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

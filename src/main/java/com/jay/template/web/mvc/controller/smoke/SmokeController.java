@@ -1,14 +1,14 @@
-package com.jay.template.web.mvc.controller.smoke;
+package com.jay.voyager.web.mvc.controller.smoke;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jay.template.app.smoke.service.SmokeService;
-import com.jay.template.core.domain.smoke.SmokeCheckResult;
-import com.jay.template.web.mvc.controller.smoke.api.model.SmokeResponse;
-import com.jay.template.web.mvc.controller.smoke.mapping.SmokeResponseMapper;
+import com.jay.voyager.app.smoke.service.SmokeService;
+import com.jay.voyager.core.domain.smoke.SmokeCheckResult;
+import com.jay.voyager.web.mvc.controller.smoke.api.model.SmokeResponse;
+import com.jay.voyager.web.mvc.controller.smoke.mapping.SmokeResponseMapper;
 
 @Profile("smoke")
 @RestController

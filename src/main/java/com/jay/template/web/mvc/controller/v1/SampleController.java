@@ -1,12 +1,12 @@
-package com.jay.template.web.mvc.controller.v1;
+package com.jay.voyager.web.mvc.controller.v1;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jay.template.api.v1.sample.SampleApi;
-import com.jay.template.api.v1.sample.model.SampleResponse;
-import com.jay.template.core.context.identity.Identity;
-import com.jay.template.core.context.identity.IdentityContextHolder;
+import com.jay.voyager.api.v1.sample.SampleApi;
+import com.jay.voyager.api.v1.sample.model.SampleResponse;
+import com.jay.voyager.core.context.identity.Identity;
+import com.jay.voyager.core.context.identity.IdentityContextHolder;
 
 @RestController
 public class SampleController implements SampleApi {

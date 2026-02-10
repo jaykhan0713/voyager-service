@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.resiliency.bulkhead;
+package com.jay.voyager.infra.outbound.http.client.resiliency.bulkhead;
 
 import java.io.IOException;
 import java.time.Duration;

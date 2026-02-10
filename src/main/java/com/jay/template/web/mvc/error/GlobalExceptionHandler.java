@@ -1,4 +1,4 @@
-package com.jay.template.web.mvc.error;
+package com.jay.voyager.web.mvc.error;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,13 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.jay.template.api.v1.common.error.ErrorResponse;
-import com.jay.template.core.error.api.ApiException;
-import com.jay.template.core.error.api.ErrorType;
-import com.jay.template.web.error.ErrorResponseSpec;
-import com.jay.template.web.error.ErrorResponseSpecFactory;
+import com.jay.voyager.api.v1.common.error.ErrorResponse;
+import com.jay.voyager.core.error.api.ApiException;
+import com.jay.voyager.core.error.api.ErrorType;
+import com.jay.voyager.web.error.ErrorResponseSpec;
+import com.jay.voyager.web.error.ErrorResponseSpecFactory;
 
-import static com.jay.template.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
+import static com.jay.voyager.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

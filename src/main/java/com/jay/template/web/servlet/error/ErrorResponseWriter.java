@@ -1,4 +1,4 @@
-package com.jay.template.web.servlet.error;
+package com.jay.voyager.web.servlet.error;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -7,9 +7,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import tools.jackson.databind.ObjectMapper;
 
-import com.jay.template.core.error.api.ErrorType;
-import com.jay.template.web.error.ErrorResponseSpec;
-import com.jay.template.web.error.ErrorResponseSpecFactory;
+import com.jay.voyager.core.error.api.ErrorType;
+import com.jay.voyager.web.error.ErrorResponseSpec;
+import com.jay.voyager.web.error.ErrorResponseSpecFactory;
 
 // for servlet/ mapping
 public class ErrorResponseWriter {

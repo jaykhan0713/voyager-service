@@ -1,11 +1,11 @@
-package com.jay.template.infra.concurrent.propagation.mdc;
+package com.jay.voyager.infra.concurrent.propagation.mdc;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
 
 import org.slf4j.MDC;
 
-import com.jay.template.infra.concurrent.propagation.ContextPropagator;
+import com.jay.voyager.infra.concurrent.propagation.ContextPropagator;
 
 public final class MdcContextPropagator implements ContextPropagator {
 

@@ -1,4 +1,4 @@
-package com.jay.template.core.context.identity;
+package com.jay.voyager.core.context.identity;
 
 /**
  * Snapshot of identity-scoped identity propagation.

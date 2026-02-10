@@ -1,9 +1,9 @@
-package com.jay.template.web.mvc.controller.smoke.mapping;
+package com.jay.voyager.web.mvc.controller.smoke.mapping;
 
 import org.springframework.stereotype.Component;
 
-import com.jay.template.core.domain.smoke.SmokeCheckResult;
-import com.jay.template.web.mvc.controller.smoke.api.model.SmokeResponse;
+import com.jay.voyager.core.domain.smoke.SmokeCheckResult;
+import com.jay.voyager.web.mvc.controller.smoke.api.model.SmokeResponse;
 
 // Translate app domain result into API response contract
 @Component

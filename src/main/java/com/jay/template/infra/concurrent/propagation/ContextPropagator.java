@@ -1,4 +1,4 @@
-package com.jay.template.infra.concurrent.propagation;
+package com.jay.voyager.infra.concurrent.propagation;
 
 import java.util.concurrent.Callable;
 

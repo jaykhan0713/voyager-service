@@ -1,4 +1,4 @@
-package com.jay.template.web.servlet.filter;
+package com.jay.voyager.web.servlet.filter;
 
 import java.io.IOException;
 import java.util.Map;
@@ -19,10 +19,10 @@ import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import com.jay.template.core.context.identity.Identity;
-import com.jay.template.core.context.identity.IdentityContextHolder;
-import com.jay.template.core.context.identity.IdentityContextSnapshot;
-import com.jay.template.core.observability.mdc.MdcFieldNames;
+import com.jay.voyager.core.context.identity.Identity;
+import com.jay.voyager.core.context.identity.IdentityContextHolder;
+import com.jay.voyager.core.context.identity.IdentityContextSnapshot;
+import com.jay.voyager.core.observability.mdc.MdcFieldNames;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

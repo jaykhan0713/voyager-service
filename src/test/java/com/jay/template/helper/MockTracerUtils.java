@@ -1,4 +1,4 @@
-package com.jay.template.helper;
+package com.jay.voyager.helper;
 
 import io.micrometer.tracing.Span;
 import io.micrometer.tracing.TraceContext;

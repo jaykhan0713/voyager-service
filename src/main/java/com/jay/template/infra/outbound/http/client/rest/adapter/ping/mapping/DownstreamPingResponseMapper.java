@@ -1,7 +1,7 @@
-package com.jay.template.infra.outbound.http.client.rest.adapter.ping.mapping;
+package com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.mapping;
 
-import com.jay.template.infra.outbound.http.client.rest.adapter.ping.contract.DownstreamPingResponse;
-import com.jay.template.core.domain.dependency.ping.PingResult;
+import com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.contract.DownstreamPingResponse;
+import com.jay.voyager.core.domain.dependency.ping.PingResult;
 
 public class DownstreamPingResponseMapper {
 

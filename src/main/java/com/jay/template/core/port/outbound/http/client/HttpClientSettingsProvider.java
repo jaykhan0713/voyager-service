@@ -1,8 +1,8 @@
-package com.jay.template.core.port.outbound.http.client;
+package com.jay.voyager.core.port.outbound.http.client;
 
 import java.util.List;
 
-import com.jay.template.core.outbound.http.client.settings.HttpClientSettings;
+import com.jay.voyager.core.outbound.http.client.settings.HttpClientSettings;
 
 public interface HttpClientSettingsProvider {
 

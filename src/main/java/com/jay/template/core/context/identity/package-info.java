@@ -14,4 +14,4 @@
  * at inbound boundaries.
  * </p>
  */
-package com.jay.template.core.context.identity;
+package com.jay.voyager.core.context.identity;

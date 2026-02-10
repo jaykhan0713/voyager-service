@@ -1,4 +1,4 @@
-package com.jay.template.core.domain.smoke;
+package com.jay.voyager.core.domain.smoke;
 
 // aggregated model based on dependency models.
 public record SmokeCheckResult(

@@ -3,10 +3,10 @@
  *
  * <p>
  * The core layer declares the
- * {@link com.jay.template.core.port.dependency.ping.PingDependency}
+ * {@link com.jay.voyager.core.port.dependency.ping.PingDependency}
  * port. The infra layer provides one or more implementations of that port,
  * such as
- * {@link com.jay.template.infra.outbound.http.client.rest.adapter.ping.PingRestClientAdapter}.
+ * {@link com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.PingRestClientAdapter}.
  * </p>
  *
  * <p>
@@ -15,4 +15,4 @@
  * words, bootstrap binds the port to the adapter here.
  * </p>
  */
-package com.jay.template.bootstrap.dependency.ping.configuration;
+package com.jay.voyager.bootstrap.dependency.ping.configuration;

@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.transport.http.properties;
+package com.jay.voyager.bootstrap.transport.http.properties;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

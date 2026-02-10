@@ -1,4 +1,4 @@
-package com.jay.template.web.servlet.error;
+package com.jay.voyager.web.servlet.error;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,10 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import tools.jackson.databind.ObjectMapper;
 
-import com.jay.template.api.v1.common.error.ErrorResponse;
-import com.jay.template.core.error.api.ErrorType;
-import com.jay.template.web.error.ErrorResponseSpec;
-import com.jay.template.web.error.ErrorResponseSpecFactory;
+import com.jay.voyager.api.v1.common.error.ErrorResponse;
+import com.jay.voyager.core.error.api.ErrorType;
+import com.jay.voyager.web.error.ErrorResponseSpec;
+import com.jay.voyager.web.error.ErrorResponseSpecFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
-import static com.jay.template.core.error.api.ErrorType.TOO_MANY_REQUESTS;
+import static com.jay.voyager.core.error.api.ErrorType.TOO_MANY_REQUESTS;
 
 class ErrorResponseWriterTest {
 

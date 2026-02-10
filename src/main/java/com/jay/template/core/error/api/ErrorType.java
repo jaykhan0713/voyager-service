@@ -1,4 +1,4 @@
-package com.jay.template.core.error.api;
+package com.jay.voyager.core.error.api;
 
 public enum ErrorType {
     //Server errors

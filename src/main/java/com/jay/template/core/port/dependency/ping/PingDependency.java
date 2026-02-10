@@ -1,6 +1,6 @@
-package com.jay.template.core.port.dependency.ping;
+package com.jay.voyager.core.port.dependency.ping;
 
-import com.jay.template.core.domain.dependency.ping.PingResult;
+import com.jay.voyager.core.domain.dependency.ping.PingResult;
 
 public interface PingDependency {
     PingResult ping();

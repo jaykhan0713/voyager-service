@@ -1,8 +1,8 @@
-package com.jay.template.core.outbound.http.client.settings;
+package com.jay.voyager.core.outbound.http.client.settings;
 
 import java.time.Duration;
 
-import com.jay.template.core.outbound.resiliency.policy.ResiliencyPolicy;
+import com.jay.voyager.core.outbound.resiliency.policy.ResiliencyPolicy;
 
 public record HttpClientSettings(
         String clientName,

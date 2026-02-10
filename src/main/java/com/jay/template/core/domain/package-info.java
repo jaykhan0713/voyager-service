@@ -12,4 +12,4 @@
  * example wiring, rather than core business logic. Refer to dependency.ping and smoke
  * </p>
  */
-package com.jay.template.core.domain;
+package com.jay.voyager.core.domain;

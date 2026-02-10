@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.rest.error;
+package com.jay.voyager.infra.outbound.http.client.rest.error;
 
 import java.util.function.Supplier;
 
@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 
-import com.jay.template.core.error.dependency.DependencyCallException;
-import com.jay.template.core.error.dependency.Reason;
+import com.jay.voyager.core.error.dependency.DependencyCallException;
+import com.jay.voyager.core.error.dependency.Reason;
 
 public final class RestClientExceptionTranslator {
 

@@ -1,4 +1,4 @@
-package com.jay.template.web.servlet.filter;
+package com.jay.voyager.web.servlet.filter;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.jay.template.core.context.identity.Identity;
-import com.jay.template.core.context.identity.IdentityContextHolder;
-import com.jay.template.core.observability.mdc.MdcFieldNames;
+import com.jay.voyager.core.context.identity.Identity;
+import com.jay.voyager.core.context.identity.IdentityContextHolder;
+import com.jay.voyager.core.observability.mdc.MdcFieldNames;
 
 /**
  * Populates MDC (Mapped Diagnostic Context) fields for structured identity logging.

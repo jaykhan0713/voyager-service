@@ -1,17 +1,17 @@
 services:
-  service-template:
+  voyager-service:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: service-template:dev
+    image: voyager-service:dev
     ports:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: dev
       OTLP_ENABLED: "true"
       OTLP_ENDPOINT: "http://otel-collector:4318/v1/traces"
-      OTEL_SERVICE_NAME: "service-template"
-      OTEL_RESOURCE_ATTRIBUTES: "service.name=service-template"
+      OTEL_SERVICE_NAME: "voyager-service"
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=voyager-service"
     networks: [obs]
     depends_on:
       - otel-collector

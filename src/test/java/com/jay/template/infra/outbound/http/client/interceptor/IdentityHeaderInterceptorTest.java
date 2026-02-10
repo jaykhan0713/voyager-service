@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.interceptor;
+package com.jay.voyager.infra.outbound.http.client.interceptor;
 
 import java.io.IOException;
 
@@ -11,10 +11,10 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpResponse;
 
-import com.jay.template.core.context.identity.Identity;
-import com.jay.template.core.context.identity.IdentityContextHolder;
-import com.jay.template.core.context.identity.IdentityContextSnapshot;
-import com.jay.template.core.transport.http.IdentityHeaders;
+import com.jay.voyager.core.context.identity.Identity;
+import com.jay.voyager.core.context.identity.IdentityContextHolder;
+import com.jay.voyager.core.context.identity.IdentityContextSnapshot;
+import com.jay.voyager.core.transport.http.IdentityHeaders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;

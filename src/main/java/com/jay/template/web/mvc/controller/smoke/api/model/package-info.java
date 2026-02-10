@@ -3,7 +3,7 @@
  *
  * <p>
  * This type represents the shape of a smoke response returned by
- * {@link com.jay.template.web.mvc.controller.smoke.SmokeController}
+ * {@link com.jay.voyager.web.mvc.controller.smoke.SmokeController}
  * Controller. For a real service context, refer to response models in api/ package.
  * </p>
  *
@@ -12,4 +12,4 @@
  * without introducing an additional api response contract into the template.
  * </p>
  */
-package com.jay.template.web.mvc.controller.smoke.api.model;
+package com.jay.voyager.web.mvc.controller.smoke.api.model;

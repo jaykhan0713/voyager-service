@@ -1,4 +1,4 @@
-package com.jay.template.core.context.identity;
+package com.jay.voyager.core.context.identity;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

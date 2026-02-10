@@ -1,12 +1,12 @@
-package com.jay.template.bootstrap.transport.http.headers.binding;
+package com.jay.voyager.bootstrap.transport.http.headers.binding;
 
 import java.util.Locale;
 
 import org.springframework.stereotype.Component;
 
-import com.jay.template.bootstrap.transport.http.properties.TransportHttpProperties;
-import com.jay.template.core.port.transport.http.IdentityHeadersProvider;
-import com.jay.template.core.transport.http.IdentityHeaders;
+import com.jay.voyager.bootstrap.transport.http.properties.TransportHttpProperties;
+import com.jay.voyager.core.port.transport.http.IdentityHeadersProvider;
+import com.jay.voyager.core.transport.http.IdentityHeaders;
 
 @Component
 public class PropertiesIdentityHeadersResolver implements IdentityHeadersProvider {

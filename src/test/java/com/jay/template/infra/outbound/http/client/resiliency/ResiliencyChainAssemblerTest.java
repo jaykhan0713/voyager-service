@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.resiliency;
+package com.jay.voyager.infra.outbound.http.client.resiliency;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -16,9 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpResponse;
 
-import com.jay.template.core.outbound.resiliency.policy.ResiliencyPolicy;
-import com.jay.template.infra.outbound.http.client.resiliency.bulkhead.BulkheadRequestDecoratorFactory;
-import com.jay.template.infra.outbound.http.client.resiliency.circuitbreaker.CircuitBreakerRequestDecoratorFactory;
+import com.jay.voyager.core.outbound.resiliency.policy.ResiliencyPolicy;
+import com.jay.voyager.infra.outbound.http.client.resiliency.bulkhead.BulkheadRequestDecoratorFactory;
+import com.jay.voyager.infra.outbound.http.client.resiliency.circuitbreaker.CircuitBreakerRequestDecoratorFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

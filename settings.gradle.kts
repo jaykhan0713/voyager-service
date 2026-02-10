@@ -1,1 +1,1 @@
-rootProject.name = "service-template"
+rootProject.name = "voyager-service"

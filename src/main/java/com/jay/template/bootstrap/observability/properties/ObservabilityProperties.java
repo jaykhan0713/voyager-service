@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.observability.properties;
+package com.jay.voyager.bootstrap.observability.properties;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

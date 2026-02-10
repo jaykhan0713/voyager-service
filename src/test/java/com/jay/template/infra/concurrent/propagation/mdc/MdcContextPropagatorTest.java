@@ -1,4 +1,4 @@
-package com.jay.template.infra.concurrent.propagation.mdc;
+package com.jay.voyager.infra.concurrent.propagation.mdc;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicReference;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.MDC;
 
-import com.jay.template.infra.concurrent.propagation.ContextPropagator;
+import com.jay.voyager.infra.concurrent.propagation.ContextPropagator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

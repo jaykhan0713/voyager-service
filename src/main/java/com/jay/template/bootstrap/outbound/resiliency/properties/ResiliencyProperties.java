@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.outbound.resiliency.properties;
+package com.jay.voyager.bootstrap.outbound.resiliency.properties;
 
 import java.time.Duration;
 import jakarta.validation.Valid;

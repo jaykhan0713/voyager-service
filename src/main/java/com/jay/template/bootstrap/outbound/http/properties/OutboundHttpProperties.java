@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.outbound.http.properties;
+package com.jay.voyager.bootstrap.outbound.http.properties;
 
 import java.time.Duration;
 import java.util.Map;
@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
-import com.jay.template.bootstrap.outbound.resiliency.properties.ResiliencyProperties;
+import com.jay.voyager.bootstrap.outbound.resiliency.properties.ResiliencyProperties;
 
 @ConfigurationProperties(prefix = "platform.outbound.http")
 @Validated

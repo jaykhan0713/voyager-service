@@ -1,4 +1,4 @@
-package com.jay.template.api.v1.common.error;
+package com.jay.voyager.api.v1.common.error;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

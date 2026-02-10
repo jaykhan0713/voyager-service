@@ -1,4 +1,4 @@
-package com.jay.template.web.servlet.filter;
+package com.jay.voyager.web.servlet.filter;
 
 import java.io.IOException;
 import jakarta.servlet.FilterChain;
@@ -8,10 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.jay.template.core.context.identity.Identity;
-import com.jay.template.core.context.identity.IdentityContextHolder;
-import com.jay.template.core.context.identity.IdentityContextSnapshot;
-import com.jay.template.core.transport.http.IdentityHeaders;
+import com.jay.voyager.core.context.identity.Identity;
+import com.jay.voyager.core.context.identity.IdentityContextHolder;
+import com.jay.voyager.core.context.identity.IdentityContextSnapshot;
+import com.jay.voyager.core.transport.http.IdentityHeaders;
 
 /**
  * Binds identity to the current thread for the duration of a single HTTP identity.

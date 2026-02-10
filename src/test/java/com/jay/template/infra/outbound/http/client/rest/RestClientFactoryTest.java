@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.rest;
+package com.jay.voyager.infra.outbound.http.client.rest;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -11,11 +11,11 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestClient;
 
-import com.jay.template.core.outbound.http.client.settings.HttpClientSettings;
-import com.jay.template.core.outbound.resiliency.policy.ResiliencyPolicy;
-import com.jay.template.infra.outbound.http.client.interceptor.IdentityHeaderInterceptor;
-import com.jay.template.infra.outbound.http.client.registry.HttpClientSettingsRegistry;
-import com.jay.template.infra.outbound.http.client.resiliency.ResiliencyChainAssembler;
+import com.jay.voyager.core.outbound.http.client.settings.HttpClientSettings;
+import com.jay.voyager.core.outbound.resiliency.policy.ResiliencyPolicy;
+import com.jay.voyager.infra.outbound.http.client.interceptor.IdentityHeaderInterceptor;
+import com.jay.voyager.infra.outbound.http.client.registry.HttpClientSettingsRegistry;
+import com.jay.voyager.infra.outbound.http.client.resiliency.ResiliencyChainAssembler;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;

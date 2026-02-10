@@ -1,11 +1,11 @@
-package com.jay.template.web.error;
+package com.jay.voyager.web.error;
 
 import io.micrometer.tracing.Span;
 import io.micrometer.tracing.Tracer;
 import org.springframework.http.HttpStatus;
 
-import com.jay.template.api.v1.common.error.ErrorResponse;
-import com.jay.template.core.error.api.ErrorType;
+import com.jay.voyager.api.v1.common.error.ErrorResponse;
+import com.jay.voyager.core.error.api.ErrorType;
 
 public class ErrorResponseSpecFactory {
 

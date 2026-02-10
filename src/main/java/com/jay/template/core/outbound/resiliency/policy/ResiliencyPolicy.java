@@ -1,4 +1,4 @@
-package com.jay.template.core.outbound.resiliency.policy;
+package com.jay.voyager.core.outbound.resiliency.policy;
 
 import java.time.Duration;
 

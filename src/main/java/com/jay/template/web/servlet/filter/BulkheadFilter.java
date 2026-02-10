@@ -1,4 +1,4 @@
-package com.jay.template.web.servlet.filter;
+package com.jay.voyager.web.servlet.filter;
 
 import java.io.IOException;
 import jakarta.servlet.FilterChain;
@@ -9,9 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import io.github.resilience4j.bulkhead.Bulkhead;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.jay.template.web.servlet.error.ErrorResponseWriter;
+import com.jay.voyager.web.servlet.error.ErrorResponseWriter;
 
-import static com.jay.template.core.error.api.ErrorType.TOO_MANY_REQUESTS;
+import static com.jay.voyager.core.error.api.ErrorType.TOO_MANY_REQUESTS;
 
 /**
  * Inbound concurrency guard implemented as a servlet filter.
@@ -40,7 +40,7 @@ import static com.jay.template.core.error.api.ErrorType.TOO_MANY_REQUESTS;
  * <h2>Error handling</h2>
  * <p>Rejections are handled directly at the filter layer, before the request
  * reaches Spring MVC. The {@link ErrorResponseWriter} is responsible for writing
- * the standardized {@link com.jay.template.api.v1.common.error.ErrorResponse}
+ * the standardized {@link com.jay.voyager.api.v1.common.error.ErrorResponse}
  * JSON payload and HTTP status to the response. This ensures consistent error
  * contracts even when the request never reaches {@code DispatcherServlet}.</p>
  *

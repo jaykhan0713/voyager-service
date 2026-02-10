@@ -1,12 +1,12 @@
-package com.jay.template.web.error;
+package com.jay.voyager.web.error;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.jay.template.api.v1.common.error.ErrorResponse;
-import com.jay.template.core.error.api.ApiException;
-import com.jay.template.web.mvc.error.GlobalExceptionHandler;
+import com.jay.voyager.api.v1.common.error.ErrorResponse;
+import com.jay.voyager.core.error.api.ApiException;
+import com.jay.voyager.web.mvc.error.GlobalExceptionHandler;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.any;
@@ -14,8 +14,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import static com.jay.template.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
-import static com.jay.template.core.error.api.ErrorType.UNAUTHORIZED;
+import static com.jay.voyager.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
+import static com.jay.voyager.core.error.api.ErrorType.UNAUTHORIZED;
 
 class GlobalExceptionHandlerTest {
 

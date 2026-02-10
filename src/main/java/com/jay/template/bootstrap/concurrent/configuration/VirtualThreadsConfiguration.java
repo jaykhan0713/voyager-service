@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.concurrent.configuration;
+package com.jay.voyager.bootstrap.concurrent.configuration;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -8,8 +8,8 @@ import java.util.concurrent.ThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.jay.template.infra.concurrent.PlatformVirtualThreadFactory;
-import com.jay.template.infra.concurrent.propagation.ContextPropagator;
+import com.jay.voyager.infra.concurrent.PlatformVirtualThreadFactory;
+import com.jay.voyager.infra.concurrent.propagation.ContextPropagator;
 
 @Configuration
 public class VirtualThreadsConfiguration {

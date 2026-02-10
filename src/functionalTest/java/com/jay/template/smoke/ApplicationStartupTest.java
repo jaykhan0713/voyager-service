@@ -1,10 +1,10 @@
-package com.jay.template.smoke;
+package com.jay.voyager.smoke;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 
-import com.jay.template.common.FunctionalTestBase;
-import com.jay.template.common.SpringBootTestShared;
+import com.jay.voyager.common.FunctionalTestBase;
+import com.jay.voyager.common.SpringBootTestShared;
 
 import static org.junit.jupiter.api.Assertions.*;
 

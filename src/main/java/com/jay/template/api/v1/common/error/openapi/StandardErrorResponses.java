@@ -1,4 +1,4 @@
-package com.jay.template.api.v1.common.error.openapi;
+package com.jay.voyager.api.v1.common.error.openapi;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
-import com.jay.template.api.v1.common.error.ErrorResponse;
+import com.jay.voyager.api.v1.common.error.ErrorResponse;
 
 /**
  * Declares the standard error responses shared by all v1 API endpoints.

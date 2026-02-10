@@ -1,10 +1,10 @@
-package com.jay.template.bootstrap.observability.mdc.binding;
+package com.jay.voyager.bootstrap.observability.mdc.binding;
 
 import org.springframework.stereotype.Component;
 
-import com.jay.template.bootstrap.observability.properties.ObservabilityProperties;
-import com.jay.template.core.observability.mdc.MdcFieldNames;
-import com.jay.template.core.port.observability.mdc.MdcFieldNamesProvider;
+import com.jay.voyager.bootstrap.observability.properties.ObservabilityProperties;
+import com.jay.voyager.core.observability.mdc.MdcFieldNames;
+import com.jay.voyager.core.port.observability.mdc.MdcFieldNamesProvider;
 
 @Component
 public class PropertiesMdcFieldNamesResolver implements MdcFieldNamesProvider {

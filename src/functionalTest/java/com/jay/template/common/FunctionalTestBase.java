@@ -1,4 +1,4 @@
-package com.jay.template.common;
+package com.jay.voyager.common;
 
 import java.io.IOException;
 

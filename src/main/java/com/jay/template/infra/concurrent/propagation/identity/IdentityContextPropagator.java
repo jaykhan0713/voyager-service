@@ -1,10 +1,10 @@
-package com.jay.template.infra.concurrent.propagation.identity;
+package com.jay.voyager.infra.concurrent.propagation.identity;
 
 import java.util.concurrent.Callable;
 
-import com.jay.template.core.context.identity.IdentityContextHolder;
-import com.jay.template.core.context.identity.IdentityContextSnapshot;
-import com.jay.template.infra.concurrent.propagation.ContextPropagator;
+import com.jay.voyager.core.context.identity.IdentityContextHolder;
+import com.jay.voyager.core.context.identity.IdentityContextSnapshot;
+import com.jay.voyager.infra.concurrent.propagation.ContextPropagator;
 
 /**
  * Propagates {@link IdentityContextSnapshot} across error boundaries.

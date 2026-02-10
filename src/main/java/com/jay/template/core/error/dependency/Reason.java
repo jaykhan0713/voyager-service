@@ -1,4 +1,4 @@
-package com.jay.template.core.error.dependency;
+package com.jay.voyager.core.error.dependency;
 
 public enum Reason {
 

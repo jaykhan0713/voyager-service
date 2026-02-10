@@ -56,17 +56,17 @@
             <appender-ref ref="DEV_CONSOLE"/>
         </root>
 
-        <!-- Classes in com.jay.template.* Non-identity-based logs -->
-        <logger name="com.jay.template.Starter" level="INFO" additivity="false">
+        <!-- Classes in com.jay.voyager.* Non-identity-based logs -->
+        <logger name="com.jay.voyager.Starter" level="INFO" additivity="false">
             <appender-ref ref="DEV_CONSOLE"/>
         </logger>
 
-        <logger name="com.jay.template.bootstrap" level="DEBUG" additivity="false">
+        <logger name="com.jay.voyager.bootstrap" level="DEBUG" additivity="false">
             <appender-ref ref="DEV_BOOTSTRAP_CONSOLE"/>
         </logger>
 
-        <!-- All classes under com.jay.template.* logs with MDC traceId and userId etc. -->
-        <logger name="com.jay.template" level="DEBUG" additivity="false">
+        <!-- All classes under com.jay.voyager.* logs with MDC traceId and userId etc. -->
+        <logger name="com.jay.voyager" level="DEBUG" additivity="false">
             <appender-ref ref="DEV_APP_CONSOLE"/>
         </logger>
 
@@ -102,7 +102,7 @@
     </springProfile>
 
     <!-- custom loggers -->
-    <logger name="com.jay.template.web.servlet.filter.MdcFilter" level="INFO" additivity="false">
+    <logger name="com.jay.voyager.web.servlet.filter.MdcFilter" level="INFO" additivity="false">
         <appender-ref ref="${MDC_FILTER_APPENDER}" />
     </logger>
 

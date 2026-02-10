@@ -1,4 +1,4 @@
-package com.jay.template.web.error;
+package com.jay.voyager.web.error;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -6,13 +6,13 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 
-import com.jay.template.core.error.api.ErrorType;
+import com.jay.voyager.core.error.api.ErrorType;
 
-import static com.jay.template.core.error.api.ErrorType.BAD_REQUEST;
-import static com.jay.template.core.error.api.ErrorType.DEPENDENCY_UNAVAILABLE;
-import static com.jay.template.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
-import static com.jay.template.core.error.api.ErrorType.TOO_MANY_REQUESTS;
-import static com.jay.template.core.error.api.ErrorType.UNAUTHORIZED;
+import static com.jay.voyager.core.error.api.ErrorType.BAD_REQUEST;
+import static com.jay.voyager.core.error.api.ErrorType.DEPENDENCY_UNAVAILABLE;
+import static com.jay.voyager.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
+import static com.jay.voyager.core.error.api.ErrorType.TOO_MANY_REQUESTS;
+import static com.jay.voyager.core.error.api.ErrorType.UNAUTHORIZED;
 
 final class ErrorTypeHttpStatusMapper {
 

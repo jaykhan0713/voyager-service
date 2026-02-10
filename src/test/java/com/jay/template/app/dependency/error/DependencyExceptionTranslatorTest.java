@@ -1,11 +1,11 @@
-package com.jay.template.app.dependency.error;
+package com.jay.voyager.app.dependency.error;
 
 import org.junit.jupiter.api.Test;
 
-import com.jay.template.core.error.api.ApiException;
-import com.jay.template.core.error.api.ErrorType;
-import com.jay.template.core.error.dependency.DependencyCallException;
-import com.jay.template.core.error.dependency.Reason;
+import com.jay.voyager.core.error.api.ApiException;
+import com.jay.voyager.core.error.api.ErrorType;
+import com.jay.voyager.core.error.dependency.DependencyCallException;
+import com.jay.voyager.core.error.dependency.Reason;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;

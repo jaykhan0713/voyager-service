@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.outbound.http.client.rest.configuration;
+package com.jay.voyager.bootstrap.outbound.http.client.rest.configuration;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestClient;
 
-import com.jay.template.infra.outbound.http.client.registry.HttpClientSettingsRegistry;
-import com.jay.template.infra.outbound.http.client.resiliency.ResiliencyChainAssembler;
-import com.jay.template.infra.outbound.http.client.rest.RestClientFactory;
+import com.jay.voyager.infra.outbound.http.client.registry.HttpClientSettingsRegistry;
+import com.jay.voyager.infra.outbound.http.client.resiliency.ResiliencyChainAssembler;
+import com.jay.voyager.infra.outbound.http.client.rest.RestClientFactory;
 
 @Configuration
 public class RestClientFactoryConfiguration {

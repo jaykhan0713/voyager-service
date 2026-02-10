@@ -1,4 +1,4 @@
-package com.jay.template.core.observability.mdc;
+package com.jay.voyager.core.observability.mdc;
 
 public record MdcFieldNames(
         String userId,

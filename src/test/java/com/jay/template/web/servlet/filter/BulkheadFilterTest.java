@@ -1,4 +1,4 @@
-package com.jay.template.web.servlet.filter;
+package com.jay.voyager.web.servlet.filter;
 
 import java.io.IOException;
 import jakarta.servlet.FilterChain;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import com.jay.template.web.servlet.error.ErrorResponseWriter;
+import com.jay.voyager.web.servlet.error.ErrorResponseWriter;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import static com.jay.template.core.error.api.ErrorType.TOO_MANY_REQUESTS;
+import static com.jay.voyager.core.error.api.ErrorType.TOO_MANY_REQUESTS;
 
 class BulkheadFilterTest {
 

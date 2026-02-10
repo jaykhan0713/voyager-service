@@ -1,4 +1,4 @@
-package com.jay.template.infra.concurrent.propagation.identity;
+package com.jay.voyager.infra.concurrent.propagation.identity;
 
 import java.util.concurrent.Callable;
 
@@ -6,9 +6,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.jay.template.core.context.identity.Identity;
-import com.jay.template.core.context.identity.IdentityContextHolder;
-import com.jay.template.core.context.identity.IdentityContextSnapshot;
+import com.jay.voyager.core.context.identity.Identity;
+import com.jay.voyager.core.context.identity.IdentityContextHolder;
+import com.jay.voyager.core.context.identity.IdentityContextSnapshot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;

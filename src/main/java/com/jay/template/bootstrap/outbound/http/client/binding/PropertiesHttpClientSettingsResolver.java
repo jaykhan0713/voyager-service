@@ -1,4 +1,4 @@
-package com.jay.template.bootstrap.outbound.http.client.binding;
+package com.jay.voyager.bootstrap.outbound.http.client.binding;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.jay.template.bootstrap.outbound.http.properties.OutboundHttpProperties;
-import com.jay.template.core.port.outbound.http.client.HttpClientSettingsProvider;
-import com.jay.template.core.outbound.http.client.settings.HttpClientSettings;
-import com.jay.template.core.outbound.resiliency.policy.ResiliencyPolicy;
-import com.jay.template.bootstrap.outbound.resiliency.properties.ResiliencyProperties;
+import com.jay.voyager.bootstrap.outbound.http.properties.OutboundHttpProperties;
+import com.jay.voyager.core.port.outbound.http.client.HttpClientSettingsProvider;
+import com.jay.voyager.core.outbound.http.client.settings.HttpClientSettings;
+import com.jay.voyager.core.outbound.resiliency.policy.ResiliencyPolicy;
+import com.jay.voyager.bootstrap.outbound.resiliency.properties.ResiliencyProperties;
 
 @Component
 public class PropertiesHttpClientSettingsResolver implements HttpClientSettingsProvider {

@@ -1,16 +1,16 @@
-package com.jay.template.bootstrap.web.servlet.filter.config;
+package com.jay.voyager.bootstrap.web.servlet.filter.config;
 
 import io.github.resilience4j.bulkhead.BulkheadRegistry;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.jay.template.core.port.observability.mdc.MdcFieldNamesProvider;
-import com.jay.template.core.port.transport.http.IdentityHeadersProvider;
-import com.jay.template.web.servlet.filter.BulkheadFilter;
-import com.jay.template.web.servlet.filter.IdentityFilter;
-import com.jay.template.web.servlet.filter.MdcFilter;
-import com.jay.template.web.servlet.error.ErrorResponseWriter;
+import com.jay.voyager.core.port.observability.mdc.MdcFieldNamesProvider;
+import com.jay.voyager.core.port.transport.http.IdentityHeadersProvider;
+import com.jay.voyager.web.servlet.filter.BulkheadFilter;
+import com.jay.voyager.web.servlet.filter.IdentityFilter;
+import com.jay.voyager.web.servlet.filter.MdcFilter;
+import com.jay.voyager.web.servlet.error.ErrorResponseWriter;
 
 @Configuration
 public class ServletFilterConfiguration {

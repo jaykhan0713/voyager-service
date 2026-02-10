@@ -21,7 +21,7 @@ server: # embedded servlet container configs
 
 spring:
   application:
-    name: service-template
+    name: voyager-service
 
   threads: # This app is built around project loom design, MUST enable virtual threads.
     virtual:

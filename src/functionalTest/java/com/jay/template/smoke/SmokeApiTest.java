@@ -1,4 +1,4 @@
-package com.jay.template.smoke;
+package com.jay.voyager.smoke;
 
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
@@ -15,10 +15,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import tools.jackson.databind.ObjectMapper;
 
-import com.jay.template.infra.outbound.http.client.rest.adapter.ping.contract.DownstreamPingResponse;
-import com.jay.template.web.mvc.controller.smoke.api.model.SmokeResponse;
-import com.jay.template.common.FunctionalTestBase;
-import com.jay.template.common.SpringBootTestShared;
+import com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.contract.DownstreamPingResponse;
+import com.jay.voyager.web.mvc.controller.smoke.api.model.SmokeResponse;
+import com.jay.voyager.common.FunctionalTestBase;
+import com.jay.voyager.common.SpringBootTestShared;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

@@ -1,9 +1,9 @@
-package com.jay.template.infra.concurrent;
+package com.jay.voyager.infra.concurrent;
 
 import java.util.List;
 import java.util.concurrent.ThreadFactory;
 
-import com.jay.template.infra.concurrent.propagation.ContextPropagator;
+import com.jay.voyager.infra.concurrent.propagation.ContextPropagator;
 
 public final class PlatformVirtualThreadFactory implements ThreadFactory {
 

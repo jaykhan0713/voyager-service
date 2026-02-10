@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.resiliency.circuitbreaker;
+package com.jay.voyager.infra.outbound.http.client.resiliency.circuitbreaker;
 
 import java.io.IOException;
 import java.io.OutputStream;

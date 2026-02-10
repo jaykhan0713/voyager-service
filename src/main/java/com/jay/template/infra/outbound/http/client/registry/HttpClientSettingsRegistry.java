@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.registry;
+package com.jay.voyager.infra.outbound.http.client.registry;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.jay.template.core.outbound.http.client.settings.HttpClientSettings;
-import com.jay.template.core.port.outbound.http.client.HttpClientSettingsProvider;
+import com.jay.voyager.core.outbound.http.client.settings.HttpClientSettings;
+import com.jay.voyager.core.port.outbound.http.client.HttpClientSettingsProvider;
 
 //takes resolved core HttpClientSettings model and creates a stateful registry to be accessed by client.
 public class HttpClientSettingsRegistry {

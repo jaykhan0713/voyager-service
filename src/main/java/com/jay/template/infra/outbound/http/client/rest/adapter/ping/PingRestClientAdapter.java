@@ -1,12 +1,12 @@
-package com.jay.template.infra.outbound.http.client.rest.adapter.ping;
+package com.jay.voyager.infra.outbound.http.client.rest.adapter.ping;
 
 import org.springframework.web.client.RestClient;
 
-import com.jay.template.core.domain.dependency.ping.PingResult;
-import com.jay.template.core.port.dependency.ping.PingDependency;
-import com.jay.template.infra.outbound.http.client.rest.error.RestClientExceptionTranslator;
-import com.jay.template.infra.outbound.http.client.rest.adapter.ping.contract.DownstreamPingResponse;
-import com.jay.template.infra.outbound.http.client.rest.adapter.ping.mapping.DownstreamPingResponseMapper;
+import com.jay.voyager.core.domain.dependency.ping.PingResult;
+import com.jay.voyager.core.port.dependency.ping.PingDependency;
+import com.jay.voyager.infra.outbound.http.client.rest.error.RestClientExceptionTranslator;
+import com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.contract.DownstreamPingResponse;
+import com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.mapping.DownstreamPingResponseMapper;
 
 public class PingRestClientAdapter implements PingDependency {
 

@@ -1,4 +1,4 @@
-package com.jay.template.infra.outbound.http.client.registry;
+package com.jay.voyager.infra.outbound.http.client.registry;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
-import com.jay.template.core.outbound.http.client.settings.HttpClientSettings;
-import com.jay.template.core.port.outbound.http.client.HttpClientSettingsProvider;
+import com.jay.voyager.core.outbound.http.client.settings.HttpClientSettings;
+import com.jay.voyager.core.port.outbound.http.client.HttpClientSettingsProvider;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

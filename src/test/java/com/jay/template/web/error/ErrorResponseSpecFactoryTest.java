@@ -1,19 +1,19 @@
-package com.jay.template.web.error;
+package com.jay.voyager.web.error;
 
 import io.micrometer.tracing.Tracer;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import com.jay.template.api.v1.common.error.ErrorResponse;
-import com.jay.template.core.error.api.ErrorType;
-import com.jay.template.helper.MockTracerUtils;
+import com.jay.voyager.api.v1.common.error.ErrorResponse;
+import com.jay.voyager.core.error.api.ErrorType;
+import com.jay.voyager.helper.MockTracerUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import static com.jay.template.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
+import static com.jay.voyager.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
 
 class ErrorResponseSpecFactoryTest {
 

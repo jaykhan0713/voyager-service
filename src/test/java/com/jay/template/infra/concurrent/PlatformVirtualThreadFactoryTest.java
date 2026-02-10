@@ -1,4 +1,4 @@
-package com.jay.template.infra.concurrent;
+package com.jay.voyager.infra.concurrent;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.MDC;
 
-import com.jay.template.infra.concurrent.propagation.mdc.MdcContextPropagator;
+import com.jay.voyager.infra.concurrent.propagation.mdc.MdcContextPropagator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
