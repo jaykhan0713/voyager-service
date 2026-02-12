@@ -21,8 +21,8 @@ dependencies {
     api("io.swagger.core.v3:swagger-annotations-jakarta:2.2.38")
 }
 
-val codeArtifactEndpoint = System.getenv("CODEARTIFACT_MAVEN_ENDPOINT")
-val codeArtifactToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+val codeArtifactEndpoint = System.getenv("CODEARTIFACT_ENDPOINT")
+val codeArtifactToken = System.getenv( "CODEARTIFACT_AUTH_TOKEN")
 
 publishing {
     publications {
@@ -50,7 +50,7 @@ publishing {
 tasks.withType<PublishToMavenRepository>().configureEach {
     doFirst {
         if (codeArtifactEndpoint.isNullOrBlank() || codeArtifactToken.isNullOrBlank()) {
-            error("Publishing requires CODEARTIFACT_MAVEN_ENDPOINT and CODEARTIFACT_AUTH_TOKEN")
+            error("Publishing requires CODEARTIFACT_ENDPOINT and CODEARTIFACT_AUTH_TOKEN")
         }
     }
 }
