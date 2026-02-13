@@ -2,9 +2,21 @@
 # Clean, portable build. Relies only on normal Docker layer caching.
 # No BuildKit cache mounts, so it behaves the same in CI and locally.
 
+ARG BUILD_IMAGE=eclipse-temurin:25-jdk
+ARG RUNTIME_IMAGE=eclipse-temurin:25-jre
+
 # ---- build stage ----
-FROM eclipse-temurin:25-jdk AS build
+FROM ${BUILD_IMAGE} AS build
 WORKDIR /app
+
+# arguments passed in
+ARG CODEARTIFACT_AUTH_TOKEN
+ARG CODEARTIFACT_ENDPOINT
+
+# Get DTO from pointed repo
+ENV DISABLE_COMPOSITE_DTO=true
+ENV CODEARTIFACT_AUTH_TOKEN=${CODEARTIFACT_AUTH_TOKEN}
+ENV CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT}
 
 # Copy Gradle wrapper FIRST so layers cache well
 COPY gradlew gradlew.bat ./
@@ -25,7 +37,7 @@ COPY src ./src
 RUN ./gradlew --no-daemon -x test clean bootJar
 
 # ---- runtime stage ----
-FROM eclipse-temurin:25-jre
+FROM ${RUNTIME_IMAGE}
 WORKDIR /app
 
 # Copy the single boot jar output (no wildcards).

@@ -4,6 +4,25 @@ phases:
   pre_build:
     commands:
       - "set -e"
+      - "echo Setting up CodeArtifact..."
+      - "echo CODEARTIFACT_DOMAIN_OWNER=${CODEARTIFACT_DOMAIN_OWNER}"
+      - "echo CODEARTIFACT_DOMAIN=${CODEARTIFACT_DOMAIN}"
+      - "echo CODEARTIFACT_REPO=${CODEARTIFACT_REPO}"
+      - "CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
+          --domain $CODEARTIFACT_DOMAIN \
+          --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
+          --query authorizationToken \
+          --output text)"
+      - "echo CODEARTIFACT_AUTH_TOKEN length: ${#CODEARTIFACT_AUTH_TOKEN}"
+      - "CODEARTIFACT_ENDPOINT=$(aws codeartifact get-repository-endpoint \
+          --domain $CODEARTIFACT_DOMAIN \
+          --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
+          --repository $CODEARTIFACT_REPO \
+          --format maven \
+          --query repositoryEndpoint \
+          --output text)"
+      - "echo CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT}"
+      - "export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT"
       - "echo Logging in to ECR..."
       - "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
       - "SHORT_SHA=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c1-7)"
@@ -20,7 +39,13 @@ phases:
       - "echo Building image..."
       - "VERSION=${IMAGE_TAG}"
       - "echo VERSION=${VERSION}"
-      - "docker build --build-arg VERSION=${VERSION} --build-arg BUILD_IMAGE=${BUILD_IMAGE} --build-arg RUNTIME_IMAGE=${RUNTIME_IMAGE} -t ${IMAGE_URI} ."
+      - "docker build \
+          --build-arg VERSION=${VERSION} \
+          --build-arg BUILD_IMAGE=${BUILD_IMAGE} \
+          --build-arg RUNTIME_IMAGE=${RUNTIME_IMAGE} \
+          --build-arg CODEARTIFACT_AUTH_TOKEN=${CODEARTIFACT_AUTH_TOKEN} \
+          --build-arg CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT} \
+          -t ${IMAGE_URI} ."
 
   post_build:
     commands:

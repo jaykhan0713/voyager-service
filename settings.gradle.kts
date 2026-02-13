@@ -1,10 +1,10 @@
 rootProject.name = "voyager-service"
 
-val profile = System.getenv("SPRING_PROFILES_ACTIVE")
+// Default: local dev uses the included build.
+// CI sets DISABLE_COMPOSITE_DTO=true to force resolving from CodeArtifact.
+val disableComposite = System.getenv("DISABLE_COMPOSITE_DTO")
+    ?.equals("true", ignoreCase = true) == true
 
-val useLocalDtos = profile.isNullOrBlank() || profile == "dev" || profile == "smoke"
-
-//For local project- use local
-if (useLocalDtos) {
+if (!disableComposite) {
     includeBuild("openapi-dtos")
 }

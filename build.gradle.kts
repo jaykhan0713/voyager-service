@@ -31,6 +31,24 @@ configurations {
 
 repositories {
     mavenCentral()
+
+    val codeArtifactEndpoint = System.getenv("CODEARTIFACT_ENDPOINT")
+    val codeArtifactToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+
+    if (!codeArtifactEndpoint.isNullOrBlank() && !codeArtifactToken.isNullOrBlank()) {
+        maven {
+            url = uri(codeArtifactEndpoint)
+
+            credentials {
+                username = "aws"
+                password = codeArtifactToken
+            }
+
+            content {
+                includeGroup("com.jay.voyager")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -54,7 +72,6 @@ dependencies {
     constraints {
         implementation("io.swagger.core.v3:swagger-annotations-jakarta:2.2.38")
     }
-    //implementation(project(":openapi-dtos"))
     implementation("com.jay.voyager:voyager-openapi-dtos:0.0.1-SNAPSHOT")
 
     //Resilience4j
