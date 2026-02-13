@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.7
+
 # ---- Dockerfile (production) ----
 # Clean, portable build. Relies only on normal Docker layer caching.
 # No BuildKit cache mounts, so it behaves the same in CI and locally.
@@ -27,14 +29,17 @@ COPY settings.gradle.kts build.gradle.kts ./
 
 # Prime Gradle dependency resolution.
 # This layer stays cached as long as build scripts do not change.
-RUN chmod +x gradlew && ./gradlew --no-daemon -x test help
+# mounts
+RUN --mount=type=cache,target=/root/.gradle \
+    chmod +x gradlew && ./gradlew --no-daemon -x test help
 
 # Sources (change most often)
 COPY src ./src
 
 # Build the Spring Boot executable jar (bootJar).
 # Gradle config sets bootJar archiveFileName to app.jar.
-RUN ./gradlew --no-daemon -x test clean bootJar
+RUN --mount=type=cache,target=/root/.gradle \
+    ./gradlew --no-daemon -x test clean bootJar
 
 # ---- runtime stage ----
 FROM ${RUNTIME_IMAGE}

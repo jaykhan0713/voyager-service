@@ -52,6 +52,7 @@ phases:
       - "echo Building image..."
       - "VERSION=${IMAGE_TAG}"
       - "echo VERSION=${VERSION}"
+      - "export DOCKER_BUILDKIT=1"
       - "docker build \
           --build-arg VERSION=${VERSION} \
           --build-arg BUILD_IMAGE=${BUILD_IMAGE} \
