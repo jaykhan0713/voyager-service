@@ -4,6 +4,16 @@ phases:
   pre_build:
     commands:
       - "set -e"
+      - "echo Logging in to ECR..."
+      - "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
+      - "SHORT_SHA=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c1-7)"
+      - "IMAGE_TAG=git-${SHORT_SHA}-${CODEBUILD_BUILD_NUMBER}"
+      - "IMAGE_URI=${ECR_REPO_URI}:${IMAGE_TAG}"
+      - "BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk"
+      - "RUNTIME_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jre"
+      - "echo IMAGE_URI=${IMAGE_URI}"
+      - "echo BUILD_IMAGE=${BUILD_IMAGE}"
+      - "echo RUNTIME_IMAGE=${RUNTIME_IMAGE}"
       - "echo Setting up CodeArtifact..."
       - "echo CODEARTIFACT_DOMAIN_OWNER=${CODEARTIFACT_DOMAIN_OWNER}"
       - "echo CODEARTIFACT_DOMAIN=${CODEARTIFACT_DOMAIN}"
@@ -24,17 +34,13 @@ phases:
       - "echo CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT}"
       - "export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT"
       - "echo Publishing openapi-dtos..."
-      - "./gradlew :openapi-dtos:publish --no-daemon"
-      - "echo Logging in to ECR..."
-      - "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
-      - "SHORT_SHA=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c1-7)"
-      - "IMAGE_TAG=git-${SHORT_SHA}-${CODEBUILD_BUILD_NUMBER}"
-      - "IMAGE_URI=${ECR_REPO_URI}:${IMAGE_TAG}"
-      - "BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk"
-      - "RUNTIME_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jre"
-      - "echo IMAGE_URI=${IMAGE_URI}"
-      - "echo BUILD_IMAGE=${BUILD_IMAGE}"
-      - "echo RUNTIME_IMAGE=${RUNTIME_IMAGE}"
+      - "docker run \
+          -e CODEARTIFACT_AUTH_TOKEN \
+          -e CODEARTIFACT_ENDPOINT
+          -v $CODEBUILD_SRC_DIR:/workspace \
+          -w /workspace \
+          ${BUILD_IMAGE} \
+          ./gradlew :openapi-dtos:publish"
 
   build:
     commands:
