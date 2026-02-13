@@ -1,5 +1,9 @@
 version: 0.2
 
+cache:
+  paths:
+    - '/root/.gradle/**/*' #cache gradle distribution for future builds
+
 phases:
   pre_build:
     commands:
@@ -36,7 +40,8 @@ phases:
       - "echo Publishing openapi-dtos..."
       - "docker run \
           -e CODEARTIFACT_AUTH_TOKEN \
-          -e CODEARTIFACT_ENDPOINT
+          -e CODEARTIFACT_ENDPOINT \
+          -v /root/.gradle:/root/.gradle \
           -v $CODEBUILD_SRC_DIR:/workspace \
           -w /workspace \
           ${BUILD_IMAGE} \
