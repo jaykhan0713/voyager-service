@@ -23,6 +23,8 @@ phases:
           --output text)"
       - "echo CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT}"
       - "export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT"
+      - "publishing openapi-dtos..."
+      - "./gradlew :openapi-dtos:publish --no-daemon"
       - "echo Logging in to ECR..."
       - "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
       - "SHORT_SHA=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c1-7)"
