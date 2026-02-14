@@ -76,9 +76,6 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
 
     //project DTOs
-    constraints {
-        implementation("io.swagger.core.v3:swagger-annotations-jakarta:2.2.38")
-    }
     implementation("com.jay.voyager:voyager-openapi-dtos:0.0.1-SNAPSHOT")
 
     //Resilience4j
