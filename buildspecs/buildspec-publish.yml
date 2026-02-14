@@ -16,6 +16,11 @@ phases:
         if [ "$PUBLISH_DTO" = "true" ]; then
           echo "Publishing openapi-dtos..."
 
+          echo Logging in to ECR to retrieve base images...
+          aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+          BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk
+          echo BUILD_IMAGE=${BUILD_IMAGE}
+        
           echo "Setting up CodeArtifact..."
           CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
             --domain $CODEARTIFACT_DOMAIN \
