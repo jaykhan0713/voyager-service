@@ -3,6 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+      args:
+        CODEARTIFACT_ENDPOINT: ${CODEARTIFACT_ENDPOINT}
+        CODEARTIFACT_AUTH_TOKEN: ${CODEARTIFACT_AUTH_TOKEN}
     image: voyager-service:dev
     ports:
       - "8080:8080"

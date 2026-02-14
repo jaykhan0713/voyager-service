@@ -7,6 +7,14 @@
 FROM eclipse-temurin:25-jdk AS build
 WORKDIR /app
 
+ARG CODEARTIFACT_AUTH_TOKEN
+ARG CODEARTIFACT_ENDPOINT
+
+# Get DTO from pointed repo
+ENV DISABLE_COMPOSITE_DTO=false
+ENV CODEARTIFACT_AUTH_TOKEN=${CODEARTIFACT_AUTH_TOKEN}
+ENV CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT}
+
 # Copy Gradle wrapper FIRST so layers cache well
 COPY gradlew gradlew.bat ./
 COPY gradle/wrapper/ ./gradle/wrapper/
