@@ -2,11 +2,11 @@ version: 0.2
 
 cache:
   paths:
-    - '/root/.gradle/**/*' #cache gradle distribution for future builds
+    - /root/.gradle/**/* #cache gradle distribution for future builds
 
 env:
   variables:
-    PUBLISH_DTO: "true"
+    PUBLISH_DTO: "false"
 
 phases:
   build:
