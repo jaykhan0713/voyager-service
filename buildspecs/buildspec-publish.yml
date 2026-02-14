@@ -1,0 +1,47 @@
+version: 0.2
+
+cache:
+  paths:
+    - '/root/.gradle/**/*' #cache gradle distribution for future builds
+
+env:
+  variables:
+    PUBLISH_DTO: "true"
+
+phases:
+  build:
+    commands:
+      - set -e
+      - |
+        if [ "$PUBLISH_DTO" = "true" ]; then
+          echo "Publishing openapi-dtos..."
+
+          echo "Setting up CodeArtifact..."
+          CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
+            --domain $CODEARTIFACT_DOMAIN \
+            --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
+            --query authorizationToken \
+            --output text)
+
+          CODEARTIFACT_ENDPOINT=$(aws codeartifact get-repository-endpoint \
+            --domain $CODEARTIFACT_DOMAIN \
+            --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
+            --repository $CODEARTIFACT_REPO \
+            --format maven \
+            --query repositoryEndpoint \
+            --output text)
+
+          export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT
+
+          docker run \
+            -e CODEARTIFACT_AUTH_TOKEN \
+            -e CODEARTIFACT_ENDPOINT \
+            -v /root/.gradle:/root/.gradle \
+            -v $CODEBUILD_SRC_DIR:/workspace \
+            -w /workspace \
+            ${BUILD_IMAGE} \
+            ./gradlew :openapi-dtos:publish
+
+        else
+          echo "Skipping DTO publish"
+        fi
