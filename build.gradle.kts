@@ -29,23 +29,30 @@ configurations {
     }
 }
 
+fun propOrEnv(propName: String, envName: String): String? {
+    val p = providers.gradleProperty(propName).orNull
+    if (!p.isNullOrBlank()) return p
+    val e = System.getenv(envName)
+    return if (e.isNullOrBlank()) null else e
+}
+
+val codeartifactEndpoint = propOrEnv("codeartifactEndpoint", "CODEARTIFACT_ENDPOINT")
+val codeartifactAuthToken = propOrEnv("codeartifactAuthToken", "CODEARTIFACT_AUTH_TOKEN")
+
 repositories {
     mavenCentral()
 
-    val codeArtifactEndpoint = System.getenv("CODEARTIFACT_ENDPOINT")
-    val codeArtifactToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
-
-    if (!codeArtifactEndpoint.isNullOrBlank() && !codeArtifactToken.isNullOrBlank()) {
+    if (!codeartifactEndpoint.isNullOrBlank() && !codeartifactAuthToken.isNullOrBlank()) {
         maven {
-            url = uri(codeArtifactEndpoint)
+            url = uri(codeartifactEndpoint)
 
             credentials {
                 username = "aws"
-                password = codeArtifactToken
+                password = codeartifactAuthToken
             }
 
             content {
-                includeGroup("com.jay.voyager")
+                includeGroup("com.jay.voyager") //this is overridden by composite build in settings.gradle.kts
             }
         }
     }

@@ -6,5 +6,5 @@ val disableComposite = System.getenv("DISABLE_COMPOSITE_DTO")
     ?.equals("true", ignoreCase = true) == true
 
 if (!disableComposite) {
-    includeBuild("openapi-dtos")
+    includeBuild("openapi-dtos") //this overrides gradle maven repository
 }
