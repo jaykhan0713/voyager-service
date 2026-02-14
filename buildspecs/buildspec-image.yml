@@ -7,64 +7,72 @@ cache:
 phases:
   pre_build:
     commands:
-      - set -e
-      - echo Logging in to ECR...
-      - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+      - |
+        set -e
 
-      - SHORT_SHA=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c1-7)
-      - IMAGE_TAG=git-${SHORT_SHA}-${CODEBUILD_BUILD_NUMBER}
-      - IMAGE_URI=${ECR_REPO_URI}:${IMAGE_TAG}
+        echo Logging in to ECR...
+        aws ecr get-login-password | docker login --username AWS --password-stdin ${ECR_REGISTRY}
 
-      - BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk
-      - RUNTIME_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jre
+        SHORT_SHA=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c1-7)
+        IMAGE_TAG=git-${SHORT_SHA}-${CODEBUILD_BUILD_NUMBER}
+        IMAGE_URI=${ECR_REPO_URI}:${IMAGE_TAG}
 
-      - echo IMAGE_URI=${IMAGE_URI}
-      - echo BUILD_IMAGE=${BUILD_IMAGE}
-      - echo RUNTIME_IMAGE=${RUNTIME_IMAGE}
+        BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk
+        RUNTIME_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jre
 
-      - echo Setting up CodeArtifact...
-      - echo CODEARTIFACT_DOMAIN_OWNER=${CODEARTIFACT_DOMAIN_OWNER}
-      - echo CODEARTIFACT_DOMAIN=${CODEARTIFACT_DOMAIN}
-      - echo CODEARTIFACT_REPO=${CODEARTIFACT_REPO}
+        echo IMAGE_URI=${IMAGE_URI}
+        echo BUILD_IMAGE=${BUILD_IMAGE}
+        echo RUNTIME_IMAGE=${RUNTIME_IMAGE}
 
-      - CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
-        --domain ${CODEARTIFACT_DOMAIN} \
-        --domain-owner ${CODEARTIFACT_DOMAIN_OWNER} \
-        --query authorizationToken \
-        --output text)
+        echo Setting up CodeArtifact...
+        echo CODEARTIFACT_DOMAIN_OWNER=${CODEARTIFACT_DOMAIN_OWNER}
+        echo CODEARTIFACT_DOMAIN=${CODEARTIFACT_DOMAIN}
+        echo CODEARTIFACT_REPO=${CODEARTIFACT_REPO}
 
-      - CODEARTIFACT_ENDPOINT=$(aws codeartifact get-repository-endpoint \
-        --domain ${CODEARTIFACT_DOMAIN} \
-        --domain-owner ${CODEARTIFACT_DOMAIN_OWNER} \
-        --repository ${CODEARTIFACT_REPO} \
-        --format maven \
-        --query repositoryEndpoint \
-        --output text)
+        CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
+          --domain "$CODEARTIFACT_DOMAIN" \
+          --domain-owner "$CODEARTIFACT_DOMAIN_OWNER" \
+          --query authorizationToken \
+          --output text)
 
-      - echo CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT}
-      - export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT
+        CODEARTIFACT_ENDPOINT=$(aws codeartifact get-repository-endpoint \
+          --domain "$CODEARTIFACT_DOMAIN" \
+          --domain-owner "$CODEARTIFACT_DOMAIN_OWNER" \
+          --repository "$CODEARTIFACT_REPO" \
+          --format maven \
+          --query repositoryEndpoint \
+          --output text)
+
+        echo CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT}
+
+        export IMAGE_TAG IMAGE_URI BUILD_IMAGE RUNTIME_IMAGE
+        export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT
 
   build:
     commands:
-      - echo Building image...
-      - VERSION=${IMAGE_TAG}
-      - echo VERSION=${VERSION}
-      - export DOCKER_BUILDKIT=1
+      - |
+        set -e
 
-      - docker build \
-        --build-arg VERSION=${VERSION} \
-        --build-arg BUILD_IMAGE=${BUILD_IMAGE} \
-        --build-arg RUNTIME_IMAGE=${RUNTIME_IMAGE} \
-        --build-arg CODEARTIFACT_AUTH_TOKEN=${CODEARTIFACT_AUTH_TOKEN} \
-        --build-arg CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT} \
-        -t ${IMAGE_URI} .
+        echo Building image...
+        export DOCKER_BUILDKIT=1
+
+        docker build \
+          --build-arg VERSION=${IMAGE_TAG} \
+          --build-arg BUILD_IMAGE=${BUILD_IMAGE} \
+          --build-arg RUNTIME_IMAGE=${RUNTIME_IMAGE} \
+          --build-arg CODEARTIFACT_AUTH_TOKEN=${CODEARTIFACT_AUTH_TOKEN} \
+          --build-arg CODEARTIFACT_ENDPOINT=${CODEARTIFACT_ENDPOINT} \
+          -t ${IMAGE_URI} .
 
   post_build:
     commands:
-      - echo Pushing image...
-      - docker push ${IMAGE_URI}
-      - echo ${IMAGE_TAG} > imagetag.txt
-      - echo Done.
+      - |
+        set -e
+
+        echo Pushing image...
+        docker push ${IMAGE_URI}
+        echo ${IMAGE_TAG} > imagetag.txt
+        echo Done.
 
 artifacts:
   files:

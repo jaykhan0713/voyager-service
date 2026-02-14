@@ -11,8 +11,8 @@ env:
 phases:
   build:
     commands:
-      - set -e
       - |
+        set -e
         if [ "$PUBLISH_DTO" = "true" ]; then
           echo "Publishing openapi-dtos..."
 
