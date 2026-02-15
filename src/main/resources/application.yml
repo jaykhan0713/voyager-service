@@ -1,7 +1,7 @@
 server: # embedded servlet container configs
   port: 8080
 
-  tomcat: # edge / connector-level (NIO) configs
+  tomcat: # connector-level (NIO) configs
     # Slow client protection (time allowed to receive request line + headers + start of body)
     connection-timeout: 5s
 
@@ -21,7 +21,7 @@ server: # embedded servlet container configs
 
 spring:
   application:
-    name: edge-service
+    name: voyager-service
 
   threads: # This app is built around project loom design, MUST enable virtual threads.
     virtual:
