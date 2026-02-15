@@ -21,8 +21,15 @@ dependencies {
     api("io.swagger.core.v3:swagger-annotations-jakarta:2.2.38")
 }
 
-val codeArtifactEndpoint = System.getenv("CODEARTIFACT_ENDPOINT")
-val codeArtifactToken = System.getenv( "CODEARTIFACT_AUTH_TOKEN")
+fun propOrEnv(propName: String, envName: String): String? {
+    val p = providers.gradleProperty(propName).orNull
+    if (!p.isNullOrBlank()) return p
+    val e = System.getenv(envName)
+    return if (e.isNullOrBlank()) null else e
+}
+
+val codeartifactEndpoint = propOrEnv("codeartifactEndpoint", "CODEARTIFACT_ENDPOINT")
+val codeartifactAuthToken = propOrEnv("codeartifactAuthToken", "CODEARTIFACT_AUTH_TOKEN")
 
 publishing {
     publications {
@@ -33,13 +40,13 @@ publishing {
     }
 
     // Only add remote repo if env vars are present (CI)
-    if (!codeArtifactEndpoint.isNullOrBlank() && !codeArtifactToken.isNullOrBlank()) {
+    if (!codeartifactEndpoint.isNullOrBlank() && !codeartifactAuthToken.isNullOrBlank()) {
         repositories {
             maven {
-                url = uri(codeArtifactEndpoint)
+                url = uri(codeartifactEndpoint)
                 credentials {
                     username = "aws"
-                    password = codeArtifactToken
+                    password = codeartifactAuthToken
                 }
             }
         }
@@ -49,7 +56,7 @@ publishing {
 // fail loudly only when publishing is actually invoked
 tasks.withType<PublishToMavenRepository>().configureEach {
     doFirst {
-        if (codeArtifactEndpoint.isNullOrBlank() || codeArtifactToken.isNullOrBlank()) {
+        if (codeartifactEndpoint.isNullOrBlank() || codeartifactAuthToken.isNullOrBlank()) {
             error("Publishing requires CODEARTIFACT_ENDPOINT and CODEARTIFACT_AUTH_TOKEN")
         }
     }
