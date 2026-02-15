@@ -1,9 +1,5 @@
 version: 0.2
 
-cache:
-  paths:
-    - /root/.gradle/**/* #cache gradle distribution for future builds
-
 env:
   variables:
     PUBLISH_DTO: "true"
@@ -13,9 +9,6 @@ phases:
     commands:
       - |
         set -e
-        
-        echo HOME=$HOME
-        ls -la $HOME/.gradle || true
         
         if [ "$PUBLISH_DTO" = "true" ]; then
           echo "Publishing openapi-dtos..."
@@ -45,7 +38,6 @@ phases:
           docker run \
             -e CODEARTIFACT_AUTH_TOKEN \
             -e CODEARTIFACT_ENDPOINT \
-            -v /root/.gradle:/root/.gradle \
             -v $CODEBUILD_SRC_DIR:/workspace \
             -w /workspace \
             ${BUILD_IMAGE} \

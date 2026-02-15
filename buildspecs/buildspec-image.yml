@@ -1,9 +1,5 @@
 version: 0.2
 
-cache:
-  paths:
-    - /root/.gradle/**/*   # cache gradle distribution for future builds
-
 phases:
   pre_build:
     commands:
@@ -54,7 +50,6 @@ phases:
         set -e
 
         echo Building image...
-        export DOCKER_BUILDKIT=1
 
         docker build \
           --build-arg VERSION=${IMAGE_TAG} \
