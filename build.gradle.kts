@@ -52,7 +52,7 @@ repositories {
             }
 
             content {
-                includeGroup("com.jay.voyager") //this is overridden by composite build in settings.gradle.kts
+                includeGroup("com.jay.voyager")
             }
         }
     }
@@ -75,8 +75,13 @@ dependencies {
     implementation(platform("org.springdoc:springdoc-openapi-bom:3.0.0"))
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
 
-    //project DTOs
-    implementation("com.jay.voyager:voyager-openapi-dtos:0.0.1-SNAPSHOT")
+    //project owned DTOs
+    val disableLocalDto = System.getenv("DISABLE_LOCAL_DTO") == "true"
+    if (disableLocalDto) {
+        implementation("com.jay.voyager:voyager-openapi-dtos:0.0.1-SNAPSHOT")
+    } else {
+        implementation(project(":openapi-dtos"))
+    }
 
     //Resilience4j
     implementation(platform("io.github.resilience4j:resilience4j-bom:2.3.0"))

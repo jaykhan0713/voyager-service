@@ -28,7 +28,7 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            //artifactId = "voyager-openapi-dtos" > this is set by settings.gradle.kts
+            artifactId = "voyager-openapi-dtos"
         }
     }
 

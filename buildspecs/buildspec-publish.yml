@@ -6,7 +6,7 @@ cache:
 
 env:
   variables:
-    PUBLISH_DTO: "false"
+    PUBLISH_DTO: "true"
 
 phases:
   build:
