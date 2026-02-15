@@ -13,6 +13,10 @@ phases:
     commands:
       - |
         set -e
+        
+        echo HOME=$HOME
+        ls -la $HOME/.gradle || true
+        
         if [ "$PUBLISH_DTO" = "true" ]; then
           echo "Publishing openapi-dtos..."
 
