@@ -17,8 +17,6 @@ import com.jay.voyager.core.context.identity.IdentityContextHolder;
 @RestController
 public class VoyagerJobController implements VoyagerJobApi {
 
-    static final String SUCCESS_MESSAGE = "Voyager Endpoint Success.";
-
     @Override
     @GetMapping("/api/v1/jobs/{jobId}")
     public VoyagerJobResponse get(@PathVariable String jobId) {

@@ -1,10 +1,10 @@
 rootProject.name = "voyager-service"
 
-// Default: local dev uses the included build.
-// CI sets DISABLE_COMPOSITE_DTO=true to force resolving from CodeArtifact.
-val disableComposite = System.getenv("DISABLE_COMPOSITE_DTO")
+// Default: CI publish and local dev + local docker uses the included project
+// CI sets DISABLE_LOCAL_DTO=true to force resolving from CodeArtifact.
+val disableLocalDto = System.getenv("DISABLE_LOCAL_DTO")
     ?.equals("true", ignoreCase = true) == true
 
-if (!disableComposite) {
-    includeBuild("openapi-dtos")
+if (!disableLocalDto) {
+    include("openapi-dtos")
 }

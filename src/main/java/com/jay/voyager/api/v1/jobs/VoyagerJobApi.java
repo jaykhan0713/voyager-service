@@ -1,7 +1,5 @@
 package com.jay.voyager.api.v1.jobs;
 
-import java.util.UUID;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -9,7 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import com.jay.voyager.api.v1.common.error.openapi.StandardErrorResponses;
+import com.jay.voyager.api.v1.common.error.StandardErrorResponses;
 import com.jay.voyager.api.v1.jobs.model.VoyagerJobResponse;
 
 @Tag(

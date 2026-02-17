@@ -1,7 +1,7 @@
 server: # embedded servlet container configs
   port: 8080
 
-  tomcat: # edge / connector-level (NIO) configs
+  tomcat: # connector-level (NIO) configs
     # Slow client protection (time allowed to receive request line + headers + start of body)
     connection-timeout: 5s
 
@@ -65,6 +65,23 @@ management:
       export:
         enabled: false # would try to export metrics to something like http://localhost:4318/v1/metrics
 
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+      minimum-expected-value:
+        http:
+          server:
+            requests: 1ms
+
+      maximum-expected-value:
+        http:
+          server:
+            requests: 5s
+
 resilience4j:
   bulkhead:
     instances: #inbound instances only as it's a framework level concern.
@@ -98,8 +115,8 @@ platform: # namespace for Spring configuration keys
   outbound:
     http:  # configuration for http clients, add protocols as needed
       client-defaults:
-        connect-timeout: 2s # max time allowed for getting a usable network connection (DNS + TCP + TLS), end to end.
-        read-timeout: 5s # waiting on external I/O
+        connect-timeout: 300ms # max time allowed for getting a usable network connection (DNS + TCP + TLS), end to end.
+        read-timeout: 3s # waiting on external I/O
 
         resiliency:
           bulkhead:
@@ -117,7 +134,7 @@ platform: # namespace for Spring configuration keys
             # Note that connect and read timeouts are worst case scenario guardrails
             # should be below the sum of those + give headroom for expected in-app processing
             # to meet Service Level Objectives (SLOs)
-            slow-call-duration-threshold: 5s
+            slow-call-duration-threshold: 2500ms
 
             # Percentage of slow calls required to open the breaker
             # Note that you can have slow success and slow failure recorded in sliding window.
