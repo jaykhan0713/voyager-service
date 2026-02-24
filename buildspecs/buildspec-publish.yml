@@ -1,48 +1,39 @@
 version: 0.2
 
-env:
-  variables:
-    PUBLISH_DTO: "false"
-
 phases:
   build:
     commands:
       - |
         set -e
         
-        if [ "$PUBLISH_DTO" = "true" ]; then
-          echo "Publishing openapi-dtos..."
+        echo "Publishing openapi-dtos..."
 
-          echo Logging in to ECR to retrieve base images...
-          aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
-          BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk
-          echo BUILD_IMAGE=${BUILD_IMAGE}
-        
-          echo "Setting up CodeArtifact..."
-          CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
-            --domain $CODEARTIFACT_DOMAIN \
-            --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
-            --query authorizationToken \
-            --output text)
+        echo Logging in to ECR to retrieve base images...
+        aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+        BUILD_IMAGE=${BASE_IMAGES_REPO_URI}:eclipse-temurin-25-jdk
+        echo BUILD_IMAGE=${BUILD_IMAGE}
+      
+        echo "Setting up CodeArtifact..."
+        CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
+          --domain $CODEARTIFACT_DOMAIN \
+          --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
+          --query authorizationToken \
+          --output text)
 
-          CODEARTIFACT_ENDPOINT=$(aws codeartifact get-repository-endpoint \
-            --domain $CODEARTIFACT_DOMAIN \
-            --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
-            --repository $CODEARTIFACT_REPO \
-            --format maven \
-            --query repositoryEndpoint \
-            --output text)
+        CODEARTIFACT_ENDPOINT=$(aws codeartifact get-repository-endpoint \
+          --domain $CODEARTIFACT_DOMAIN \
+          --domain-owner $CODEARTIFACT_DOMAIN_OWNER \
+          --repository $CODEARTIFACT_REPO \
+          --format maven \
+          --query repositoryEndpoint \
+          --output text)
 
-          export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT
+        export CODEARTIFACT_AUTH_TOKEN CODEARTIFACT_ENDPOINT
 
-          docker run \
-            -e CODEARTIFACT_AUTH_TOKEN \
-            -e CODEARTIFACT_ENDPOINT \
-            -v $CODEBUILD_SRC_DIR:/workspace \
-            -w /workspace \
-            ${BUILD_IMAGE} \
-            ./gradlew :openapi-dtos:publish
-
-        else
-          echo "Skipping DTO publish"
-        fi
+        docker run \
+          -e CODEARTIFACT_AUTH_TOKEN \
+          -e CODEARTIFACT_ENDPOINT \
+          -v $CODEBUILD_SRC_DIR:/workspace \
+          -w /workspace \
+          ${BUILD_IMAGE} \
+          ./gradlew :openapi-dtos:publish
