@@ -73,12 +73,19 @@ public class MdcFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } finally {
 
-            MDC.put(mdcFieldNames.status(), String.valueOf(response.getStatus()));
+            int status = response.getStatus();
+            MDC.put(mdcFieldNames.status(), String.valueOf(status));
 
             long durationMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
             MDC.put(mdcFieldNames.durationMs(), String.valueOf(durationMs));
 
-            LOGGER.info("");
+            String traceParent = request.getHeader("traceparent");
+            boolean sampled = traceParent == null || traceParent.endsWith("-01");
+
+            if (sampled || status >= 400) {
+                LOGGER.info("");
+            }
+
             MDC.clear();
         }
     }
