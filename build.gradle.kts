@@ -70,6 +70,8 @@ dependencies {
 
     //micrometer
     implementation("io.micrometer:micrometer-registry-prometheus")
+    /* For vthread metrics, including pinned/start/unpark events */
+    implementation("io.micrometer:micrometer-java21")
 
     //OpenAPI
     implementation(platform("org.springdoc:springdoc-openapi-bom:3.0.0"))

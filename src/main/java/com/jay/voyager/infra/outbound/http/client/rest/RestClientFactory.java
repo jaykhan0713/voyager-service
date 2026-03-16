@@ -2,6 +2,7 @@ package com.jay.voyager.infra.outbound.http.client.rest;
 
 import java.net.http.HttpClient;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -77,6 +78,7 @@ public class RestClientFactory {
 
         //transport creation, JDK HttpClient
         HttpClient httpClient = HttpClient.newBuilder()
+                .executor(Executors.newVirtualThreadPerTaskExecutor())
                 .connectTimeout(connectTimeout)
                 .build();
 
