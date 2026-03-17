@@ -1,0 +1,21 @@
+services:
+  voyager-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        CODEARTIFACT_ENDPOINT: ${CODEARTIFACT_ENDPOINT}
+        CODEARTIFACT_AUTH_TOKEN: ${CODEARTIFACT_AUTH_TOKEN}
+    image: voyager-service:dev
+    # no ports — only reachable via voyager-service:8080 on platform network
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      OTLP_ENABLED: "true"
+      OTLP_ENDPOINT: "http://otel-collector:4318/v1/traces"
+      OTEL_SERVICE_NAME: "voyager-service"
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=voyager-service"
+    networks: [platform]
+
+networks:
+  platform:
+    external: true
