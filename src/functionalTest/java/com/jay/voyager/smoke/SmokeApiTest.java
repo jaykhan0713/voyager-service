@@ -18,7 +18,6 @@ import tools.jackson.databind.ObjectMapper;
 import com.jay.voyager.infra.outbound.http.client.rest.adapter.ping.contract.DownstreamPingResponse;
 import com.jay.voyager.web.mvc.controller.smoke.api.model.SmokeResponse;
 import com.jay.voyager.common.FunctionalTestBase;
-import com.jay.voyager.common.SpringBootTestShared;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -26,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.MediaType.APPLICATION_JSON;
 
-@SpringBootTestShared
 class SmokeApiTest extends FunctionalTestBase {
 
     private final TestRestTemplate restTemplate;

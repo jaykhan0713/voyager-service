@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
+@SpringBootTestShared
 public abstract class FunctionalTestBase {
 
     // To ensure test speed in CI, only spin up mockwebServer once.
