@@ -18,7 +18,7 @@ import static com.jay.voyager.core.error.api.ErrorType.INTERNAL_SERVER_ERROR;
 public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    private static final String API_EX_MESSAGE_FORMAT = "error.code={} root.cause={} ex.msg=\"{}\"";
+    private static final String API_EX_MESSAGE_FORMAT = "error.code={} root.cause={} ex.msg='{}'";
     private static final String GENERIC_EX_MESSAGE_FORMAT = "error.code=";
 
     private final ErrorResponseSpecFactory errorResponseSpecFactory;
