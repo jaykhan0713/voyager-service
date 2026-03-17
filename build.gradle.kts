@@ -65,9 +65,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-restclient")
     implementation("org.springframework.boot:spring-boot-starter-opentelemetry")
 
-    //logback
-    implementation("net.logstash.logback:logstash-logback-encoder:8.0")
-
     //micrometer
     implementation("io.micrometer:micrometer-registry-prometheus")
     /* For vthread metrics, including pinned/start/unpark events */

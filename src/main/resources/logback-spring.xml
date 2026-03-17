@@ -78,18 +78,15 @@
     <!-- ================= PROD PROFILE ================= -->
     <springProfile name="prod">
 
-        <!-- JSON console appender for CloudWatch -->
         <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-                <fieldNames>
-                    <timestamp>timestamp</timestamp>
-                    <logger>logger</logger>
-                    <thread>thread</thread>
-                    <level>level</level>
-                    <levelValue>[ignore]</levelValue>
-                    <version>[ignore]</version>
-                </fieldNames>
-                <timeZone>UTC</timeZone>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>{"timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z',UTC}","level":"%level","logger":"%logger{36}","thread":"%thread","traceId":"%X{traceId:--}","spanId":"%X{spanId:--}","message":"%msg"}%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="JSON_MDC_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>{"timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z',UTC}","level":"%level","logger":"%logger{36}","thread":"%thread","traceId":"%X{traceId:--}","spanId":"%X{spanId:--}","userId":"%X{${MDC_USER_ID}}","requestId":"%X{${MDC_REQUEST_ID}}","kind":"%X{kind}","name":"%X{${MDC_NAME}}","method":"%X{${MDC_METHOD}}","status":"%X{${MDC_STATUS}}","durationMs":"%X{${MDC_DURATION_MS}}"}%n</pattern>
             </encoder>
         </appender>
 
@@ -97,7 +94,7 @@
             <appender-ref ref="JSON_CONSOLE"/>
         </root>
 
-        <property name="MDC_FILTER_APPENDER" value="JSON_CONSOLE" />
+        <property name="MDC_FILTER_APPENDER" value="JSON_MDC_CONSOLE"/>
 
     </springProfile>
 
